@@ -1,0 +1,56 @@
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/local/lib/python3.10/dist-packages/jupyter_core/utils/__init__.py", line 173, in wrapped
+    return loop.run_until_complete(inner)
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from sklearn import svm
+C = 1.0
+gamma = 0.1
+kernel = 'rbf'
+model_svm = svm.SVC(C=C, gamma=gamma, kernel=kernel)
+model_svm.fit(X_train, y_train)
+# Prediksi pada data uji
+predictions = model_svm.predict(X_test)
+# Mengukur kinerja model dengan menghitung akurasi atau metrik lain yang relevan
+acc_svm = accuracy_score(y_test, predictions)
+print(f'Akurasi: {acc_svm}')
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+[0;32m<ipython-input-31-008fc7107686>[0m in [0;36m<cell line: 6>[0;34m()[0m
+[1;32m      4[0m [0mkernel[0m [0;34m=[0m [0;34m'rbf'[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m [0mmodel_svm[0m [0;34m=[0m [0msvm[0m[0;34m.[0m[0mSVC[0m[0;34m([0m[0mC[0m[0;34m=[0m[0mC[0m[0;34m,[0m [0mgamma[0m[0;34m=[0m[0mgamma[0m[0;34m,[0m [0mkernel[0m[0;34m=[0m[0mkernel[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 6[0;31m [0mmodel_svm[0m[0;34m.[0m[0mfit[0m[0;34m([0m[0mX_train[0m[0;34m,[0m [0my_train[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      7[0m [0;31m# Prediksi pada data uji[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      8[0m [0mpredictions[0m [0;34m=[0m [0mmodel_svm[0m[0;34m.[0m[0mpredict[0m[0;34m([0m[0mX_test[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/local/lib/python3.10/dist-packages/sklearn/svm/_base.py[0m in [0;36mfit[0;34m(self, X, y, sample_weight)[0m
+[1;32m    199[0m             )
+[1;32m    200[0m [0;34m[0m[0m
+[0;32m--> 201[0;31m         [0my[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_validate_targets[0m[0;34m([0m[0my[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    202[0m [0;34m[0m[0m
+[1;32m    203[0m         sample_weight = np.asarray(
+
+[0;32m/usr/local/lib/python3.10/dist-packages/sklearn/svm/_base.py[0m in [0;36m_validate_targets[0;34m(self, y)[0m
+[1;32m    747[0m         [0mself[0m[0;34m.[0m[0mclass_weight_[0m [0;34m=[0m [0mcompute_class_weight[0m[0;34m([0m[0mself[0m[0;34m.[0m[0mclass_weight[0m[0;34m,[0m [0mclasses[0m[0;34m=[0m[0mcls[0m[0;34m,[0m [0my[0m[0;34m=[0m[0my_[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    748[0m         [0;32mif[0m [0mlen[0m[0;34m([0m[0mcls[0m[0;34m)[0m [0;34m<[0m [0;36m2[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 749[0;31m             raise ValueError(
+[0m[1;32m    750[0m                 [0;34m"The number of classes has to be greater than one; got %d class"[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    751[0m                 [0;34m%[0m [0mlen[0m[0;34m([0m[0mcls[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mValueError[0m: The number of classes has to be greater than one; got 1 class
+
